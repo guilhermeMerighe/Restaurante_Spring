@@ -1,0 +1,457 @@
+/* ===========================================
+ 🌿 ESTILO GLOBAL - SPRINGFOOD
+=========================================== */
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #ffcc70, #ff8c00);
+    color: #2c3e50;
+    text-align: center;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 50px; /* respiro inferior */
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 50px;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ===========================================
+ 🧭 MENU DE BOTÕES E BOTÕES PADRÃO
+=========================================== */
+
+.menu {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.menu button {
+    background-color: #ffffffcc;
+    border: none;
+    border-radius: 15px;
+    padding: 20px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: all 0.25s ease;
+}
+
+.menu button:hover {
+    background-color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+}
+
+/* BOTÕES ESPECÍFICOS */
+.btn-criar {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    padding: 18px 40px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: all 0.25s ease;
+}
+
+.btn-criar:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+.btn-voltar {
+    background-color: #ffffffcc;
+    color: #2c3e50;
+    border: none;
+    border-radius: 15px;
+    padding: 18px 40px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: all 0.25s ease;
+}
+
+.btn-voltar:hover {
+    background-color: #fff;
+    transform: scale(1.05);
+}
+
+/* BOTÃO CRIAR PERSONALIZADO DENTRO DO MENU */
+.menu .btn-criar {
+    background-color: #3498db;
+    color: #fff;
+    border: 3px solid rgba(0, 0, 0, 0.2); /* borda preta sutil */
+    border-radius: 15px;
+    padding: 18px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: all 0.25s ease;
+}
+
+.menu .btn-criar:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+/* ===========================================
+ 📑 TABELAS GENÉRICAS
+=========================================== */
+
+.tabela table {
+    margin-top: 30px;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.tabela th, .tabela td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabela th {
+    background-color: #3498db;
+    color: white;
+}
+
+.tabela tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* ===========================================
+ 📦 PÁGINA DE PEDIDOS
+=========================================== */
+
+.pedidos-tabela table {
+    width: 90%;
+    max-width: 900px;
+}
+
+.pedidos-tabela td, .pedidos-tabela th {
+    text-align: center;
+}
+
+/* STATUS DO PEDIDO */
+.status {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+
+.status-aberto {
+    background-color: #f1c40f;
+}
+
+.status-finalizado {
+    background-color: #27ae60;
+}
+
+.pedidos-tabela tr:hover {
+    background-color: #f7f7f7;
+}
+
+/* ===========================================
+ 📋 DETALHES DO CLIENTE
+=========================================== */
+
+.detalhes {
+    margin-top: 30px;
+    background: #ffffffcc;
+    padding: 20px 40px;
+    border-radius: 15px;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.detalhes + .menu {
+    margin-top: 30px;
+}
+
+/* FORMULÁRIO DE EDIÇÃO DE CLIENTE */
+#form-editar {
+    margin-top: 40px;
+    margin-bottom: 60px;
+    background-color: #ffffffcc;
+    padding: 25px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    text-align: left;
+    display: inline-block;
+}
+
+#form-editar input[type="text"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+#form-editar form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#form-editar button[type="submit"] {
+    background-color: #ffffffcc;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #2c3e50;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: all 0.25s ease;
+}
+
+#form-editar button[type="submit"]:hover {
+    background-color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+}
+
+/* ===========================================
+ 🧾 DETALHES DO PEDIDO
+=========================================== */
+
+.pedido-info {
+    margin-bottom: 40px;
+}
+
+.btn-finalizar {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 20px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: all 0.25s ease;
+}
+
+.btn-finalizar:hover {
+    background-color: #2ecc71;
+    transform: scale(1.05);
+}
+
+.btn-finalizado {
+    background-color: #f1c40f;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 20px 40px;
+    font-size: 1.1em;
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+/* ITENS DO PEDIDO */
+.itens-pedido table {
+    width: 90%;
+    max-width: 900px;
+}
+
+.itens-pedido td, .itens-pedido th {
+    text-align: center;
+}
+
+/* ALTERAR QUANTIDADE */
+.alterar-quantidade {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.alterar-quantidade form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.alterar-quantidade input[type="number"] {
+    width: 60px;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.alterar-quantidade button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 500;
+}
+
+.alterar-quantidade button:hover {
+    background-color: #2980b9;
+}
+
+/* BOTÃO REMOVER ITEM */
+.btn-remover {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-remover:hover {
+    background-color: #c0392b;
+}
+
+/* MENSAGENS */
+.msg-erro {
+    margin-top: 20px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.msg-sucesso {
+    margin-top: 20px;
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* ===========================================
+ 🧾 FORMULÁRIO DE ADICIONAR ITEM
+=========================================== */
+
+.form-adicionar {
+    margin-top: 40px;
+    background-color: #ffffffcc;
+    padding: 30px 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    text-align: left;
+    width: 400px;
+}
+
+/* labels com espaço abaixo */
+.form-adicionar label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* inputs e selects com respiro entre campos */
+.form-adicionar select,
+.form-adicionar input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px; /* 🔹 espaçamento entre os campos */
+}
+
+/* botão separado do último campo */
+.form-adicionar button {
+    margin-top: 10px; /* 🔹 pequeno espaço antes do botão */
+}
+
+/* ===========================================
+ 🆕 FORMULÁRIO DE CRIAR PEDIDO
+=========================================== */
+
+.container-formularios {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 50px;
+}
+
+.form-criar-esquerda, 
+.form-criar-direita {
+    background-color: #ffffffcc;
+    padding: 30px 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    width: 320px;
+    text-align: left;
+}
+
+.form-criar-esquerda h2, 
+.form-criar-direita h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-criar-esquerda select, 
+.form-criar-direita input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-azul {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+    display: block;
+    width: 100%;
+}
+
+.btn-azul:hover {
+    background-color: #2980b9;
+}
+
+/* ===========================================
+ ⚓ RODAPÉ
+=========================================== */
+
+footer {
+    position: absolute;
+    bottom: 15px;
+    font-size: 0.9em;
+    color: #ffffffaa;
+}

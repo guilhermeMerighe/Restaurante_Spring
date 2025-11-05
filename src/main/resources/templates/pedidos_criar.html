@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Pedido</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>🆕 Criar Novo Pedido</h1>
+
+    <div class="menu">
+        <button onclick="window.location.href='/pedidos'">Voltar</button>
+    </div>
+
+    <div class="container-formularios">
+
+        <!-- 🔹 Forma 1: Selecionar Cliente -->
+        <div class="form-criar-esquerda">
+            <h2>Selecionar Cliente</h2>
+            <form th:action="@{/pedidos/criar}" method="post">
+                <label for="codCliente">Cliente:</label>
+                <select name="codCliente" id="codCliente" required>
+                    <option value="">Selecione um cliente...</option>
+                    <option th:each="c : ${clientes}"
+                            th:value="${c.codCliente}"
+                            th:text="${c.codCliente + ' - ' + c.nome}"></option>
+                </select>
+                <button type="submit" class="btn-azul">Criar Novo Pedido</button>
+            </form>
+        </div>
+
+        <!-- 🔹 Forma 2: Buscar por ID -->
+        <div class="form-criar-direita">
+            <h2>Buscar Cliente por ID</h2>
+            <form th:action="@{/pedidos/criar-por-id}" method="post">
+                <label for="codClienteId">ID do Cliente:</label>
+                <input type="number" name="codClienteId" id="codClienteId" min="1" required>
+                <button type="submit" class="btn-azul">Confirmar</button>
+            </form>
+        </div>
+
+    </div>
+
+    <p th:if="${erro}" class="msg-erro" th:text="${erro}"></p>
+</body>
+</html>

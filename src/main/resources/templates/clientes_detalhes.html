@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Cliente</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1 th:text="'👤 ' + ${cliente.nome}"></h1>
+
+    <div class="menu">
+        <button onclick="window.location.href='/clientes'">Voltar</button>
+    </div>
+
+    <div class="detalhes">
+        <p><strong>ID:</strong> <span th:text="${cliente.codCliente}"></span></p>
+        <p><strong>Telefone:</strong> <span th:text="${cliente.telefone}"></span></p>
+        <p><strong>CPF:</strong> <span th:text="${cliente.cpf}"></span></p>
+        <p><strong>RG:</strong> <span th:text="${cliente.rg}"></span></p>
+        <p><strong>Endereço:</strong> <span th:text="${cliente.endereco}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${cliente.email}"></span></p>
+    </div>
+
+    <!-- Botões abaixo dos detalhes -->
+    <div class="menu" id="menu-acoes">
+        <form th:action="@{'/clientes/' + ${cliente.codCliente} + '/excluir'}" method="post" style="display:inline;">
+            <button type="submit">Excluir</button>
+        </form>
+
+        <button id="btn-editar" onclick="alternarEdicao()">Editar</button>
+    </div>
+
+    <!-- Formulário de edição -->
+    <div id="form-editar" style="display:none;">
+        <form th:action="@{'/clientes/' + ${cliente.codCliente} + '/atualizar'}" method="post" id="formCliente">
+            <input type="text" name="nome" th:value="${cliente.nome}" placeholder="Nome">
+            <input type="text" name="telefone" th:value="${cliente.telefone}" placeholder="Telefone">
+            <input type="text" name="cpf" th:value="${cliente.cpf}" placeholder="CPF">
+            <input type="text" name="rg" th:value="${cliente.rg}" placeholder="RG">
+            <input type="text" name="endereco" th:value="${cliente.endereco}" placeholder="Endereço">
+            <input type="text" name="email" th:value="${cliente.email}" placeholder="Email">
+            <button type="submit">Salvar alterações</button>
+        </form>
+    </div>
+
+    <script>
+        function alternarEdicao() {
+            const form = document.getElementById('form-editar');
+            const btn = document.getElementById('btn-editar');
+            const formElement = document.getElementById('formCliente');
+
+            if (form.style.display === 'none' || form.style.display === '') {
+                form.style.display = 'inline-block';
+                btn.textContent = 'Cancelar';
+                btn.style.fontSize = '1em';
+            } else {
+                form.style.display = 'none';
+                formElement.reset();
+                btn.textContent = 'Editar';
+                btn.style.fontSize = '1.1em';
+            }
+        }
+    </script>
+</body>
+</html>

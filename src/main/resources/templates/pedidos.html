@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos - SpringFood</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>📦 Pedidos</h1>
+
+    <div class="menu">
+        <button class="btn-criar" onclick="window.location.href='/pedidos/novo'">Criar Pedido</button>
+        <button class="btn-voltar" onclick="window.location.href='/'">Voltar</button>
+    </div>
+
+    <div class="tabela pedidos-tabela">
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Valor Total</th>
+                <th>Status</th>
+            </tr>
+
+            <tr th:each="p : ${pedidos}" 
+                th:onclick="|window.location.href='/pedidos/${p.codPedido}'|"
+                style="cursor:pointer;">
+
+                <td th:text="${#temporals.format(p.dataPedido, 'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${p.codPedido}"></td>
+                <td th:text="${p.nomeCliente}"></td>
+                <td th:text="${#numbers.formatDecimal(p.valorTotal, 1, 2)}"></td>
+
+                <td>
+                    <span th:if="${!p.status}" class="status status-aberto">Em andamento</span>
+                    <span th:if="${p.status}" class="status status-finalizado">Finalizado</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

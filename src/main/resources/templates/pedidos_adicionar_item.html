@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Item</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>🍽️ Adicionar Item ao Pedido</h1>
+
+    <div class="menu">
+        <button th:onclick="|window.location.href='/pedidos/${pedido.codPedido}'|">Voltar</button>
+    </div>
+
+    <div class="detalhes form-adicionar">
+        <form th:action="@{'/pedidos/' + ${pedido.codPedido} + '/itens/adicionar'}" method="post">
+
+            <label for="prato">Prato:</label><br>
+            <select name="codPrato" id="prato" required>
+                <option value="">Selecione um Prato</option>
+                <option th:each="p : ${pratos}" 
+                th:value="${p.codPrato}" 
+                th:text="${p.descricao}"></option>
+
+            </select><br><br>
+
+            <label for="quantidade">Quantidade:</label><br>
+            <input type="number" name="quantidade" id="quantidade" min="1" value="1"><br><br>
+
+            <button type="submit" class="btn-finalizar">Adicionar Item</button>
+        </form>
+    </div>
+
+    <p th:if="${erro}" class="msg-erro" th:text="${erro}"></p>
+    <p th:if="${sucesso}" class="msg-sucesso" th:text="${sucesso}"></p>
+</body>
+</html>

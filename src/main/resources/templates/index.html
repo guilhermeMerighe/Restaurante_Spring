@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringFood</title>
+
+    <!-- link para o CSS global -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>🍽️ SpringFood</h1>
+
+    <div class="menu">
+        <button onclick="window.location.href='/clientes'">Clientes</button>
+        <button onclick="window.location.href='/pedidos'">Pedidos</button>
+        <button onclick="window.location.href='/ingredientes'">Ingredientes</button>
+        <button onclick="window.location.href='/pratos'">Pratos</button>
+    </div>
+
+    <footer>Restaurante SpringFood © 2025</footer>
+</body>
+</html>

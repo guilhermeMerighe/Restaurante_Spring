@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes - SpringFood</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>👥 Lista de Clientes</h1>
+
+    <div class="menu">
+        <button class="btn-criar" onclick="window.location.href='/clientes/criar'">Criar Cliente</button>
+        <button class="btn-voltar" onclick="window.location.href='/'">Voltar</button>
+    </div>
+
+    <div class="tabela">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+            </tr>
+            <tr th:each="c : ${clientes}"
+                th:onclick="|window.location.href='/clientes/${c.codCliente}'|"
+                style="cursor:pointer;">
+                <td th:text="${c.codCliente}"></td>
+                <td th:text="${c.nome}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

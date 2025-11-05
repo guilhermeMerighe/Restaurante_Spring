@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Pedido</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1 th:text="'📦 Pedido #' + ${pedido.codPedido} + ' - ' + ${pedido.nomeCliente}"></h1>
+
+    <!-- Botões superiores -->
+    <div class="menu">
+        <button onclick="window.location.href='/pedidos'">Voltar</button>
+
+        <!-- Exibe o botão de finalizar apenas se o pedido estiver em aberto -->
+        <form th:if="${!pedido.status}" th:action="@{'/pedidos/' + ${pedido.codPedido} + '/finalizar'}" method="post" style="display:inline;">
+            <button type="submit" class="btn-finalizar">Finalizar Pedido</button>
+        </form>
+
+        <!-- Exibe status se já finalizado -->
+        <button th:if="${pedido.status}" class="btn-finalizado" disabled>Pedido Finalizado</button>
+    </div>
+
+    <!-- Informações gerais do pedido -->
+    <div class="detalhes pedido-info">
+        <p><strong>Data:</strong> <span th:text="${#temporals.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')}"></span></p>
+        <p><strong>Cliente:</strong> <span th:text="${pedido.nomeCliente}"></span></p>
+        <p><strong>Valor Total:</strong> R$ <span th:text="${#numbers.formatDecimal(pedido.valorTotal, 1, 2)}"></span></p>
+        <p>
+            <strong>Status:</strong>
+            <span th:if="${!pedido.status}" class="status status-aberto">Em andamento</span>
+            <span th:if="${pedido.status}" class="status status-finalizado">Finalizado</span>
+        </p>
+    </div>
+
+
+    <!-- Botão para adicionar novo item (somente se em andamento) -->
+    <div class="menu" th:if="${!pedido.status}" style="margin-top: 20px;">
+        <button th:onclick="|window.location.href='/pedidos/${pedido.codPedido}/itens/novo'|">➕ Adicionar Item</button>
+    </div>
+
+
+
+    <!-- Itens do pedido -->
+    <div class="tabela itens-pedido">
+        <table>
+            <tr>
+                <th>Prato</th>
+                <th>Quantidade</th>
+                <th>Subtotal</th>
+                <th th:if="${!pedido.status}">Ações</th>
+            </tr>
+
+            <tr th:each="item : ${itens}">
+                <td th:text="${item.nomePrato}"></td>
+
+                    <td>
+                        <!-- Exibe o campo de quantidade editável somente se o pedido estiver em andamento -->
+                        <div th:if="${!pedido.status}" class="alterar-quantidade">
+                            <form th:action="@{'/pedidos/' + ${pedido.codPedido} + '/itens/' + ${item.codPrato} + '/atualizar'}" method="post">
+                                <input type="number" name="novaQuantidade" th:value="${item.quantidade}" min="1">
+                                <button type="submit">Alterar</button>
+                            </form>
+                        </div>
+
+                        <!-- Exibe a quantidade apenas como texto se o pedido já estiver finalizado -->
+                        <span th:if="${pedido.status}" th:text="${item.quantidade}"></span>
+                    </td>
+                    
+
+                <td>R$ <span th:text="${#numbers.formatDecimal(item.subtotal, 1, 2)}"></span></td>
+
+                <!-- Botões de ação -->
+                <td th:if="${!pedido.status}">
+                    <form th:action="@{'/pedidos/' + ${pedido.codPedido} + '/itens/' + ${item.codPrato} + '/remover'}" method="post" style="display:inline;">
+                        <button type="submit" class="btn-remover">X</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Mensagens de erro ou alerta -->
+    <p th:if="${erro}" class="msg-erro" th:text="${erro}"></p>
+</body>
+</html>
