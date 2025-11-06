@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Ingrediente - SpringFood</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>🧂 Criar Novo Ingrediente</h1>
+
+    <div class="menu">
+        <button class="btn-voltar" onclick="window.location.href='/ingredientes'">Voltar</button>
+    </div>
+
+    <form class="form-adicionar" th:action="@{/ingredientes/criar}" method="post">
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" required>
+
+        <label for="unidade">Tipo de Unidade:</label>
+        <select id="unidade" name="unidade" required>
+            <option value="">Selecione o tipo de unidade</option>
+            <option value="false">Unidade</option>
+            <option value="true">Kg</option>
+        </select>
+
+        <label for="valor">Valor Unitário (R$):</label>
+        <input type="number" id="valor" name="valorUnitario" step="0.01" required>
+
+        <label for="estoque">Quantidade Inicial no Estoque:</label>
+        <input type="number" id="estoque" name="quantidadeEstoque" min="0" value="0" required>
+
+        <button type="submit" class="btn-azul">Salvar Ingrediente</button>
+    </form>
+</body>
+</html>

@@ -83,4 +83,39 @@ public class Prato {
 
         return p;
     }
+
+
+
+    // ⚙️ Inserir prato via procedure e retornar o novo ID
+    public int inserirRetornandoId() {
+        int novoId = 0;
+
+        String sql = "{CALL sp_pratos_insert(?, ?)}";
+        String sqlSelect = "SELECT MAX(cod_prato) AS cod_prato FROM pratos";
+
+        try (Connection conn = Conexao.getConnection();
+            CallableStatement stmt = conn.prepareCall(sql)) {
+
+            stmt.setString(1, this.descricao);
+            stmt.setDouble(2, this.valorUnitario);
+            stmt.execute();
+
+            // depois da inserção, pega o último id criado
+            try (PreparedStatement stmt2 = conn.prepareStatement(sqlSelect);
+                ResultSet rs = stmt2.executeQuery()) {
+                if (rs.next()) {
+                    novoId = rs.getInt("cod_prato");
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("❌ Erro ao inserir prato e obter ID: " + e.getMessage());
+        }
+
+        return novoId;
+    }
+
+
+
+
 }

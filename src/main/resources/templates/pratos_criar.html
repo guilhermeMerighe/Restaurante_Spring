@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Prato - SpringFood</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>🆕 Criar Novo Prato</h1>
+
+    <div class="menu">
+        <button class="btn-voltar" onclick="window.location.href='/pratos'">Voltar</button>
+    </div>
+
+    <form class="form-adicionar" th:action="@{/pratos/criar}" method="post">
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" required>
+
+        <label for="valor">Valor Unitário (R$):</label>
+        <input type="number" id="valor" name="valorUnitario" step="0.01" required>
+
+        <h3>🍳 Ingredientes do Prato</h3>
+        <div id="ingredientes-container">
+            <div class="ingrediente-item">
+                <label>Ingrediente:</label>
+                <select name="ingrediente" required>
+                    <option value="">Selecione</option>
+                    <option th:each="i : ${ingredientes}" th:value="${i.codIngrediente}" th:text="${i.descricao}"></option>
+                </select>
+
+                <label>Quantidade:</label>
+                <input type="number" name="quantidade" min="1" value="1" required>
+
+                <button type="button" class="btn-remover" onclick="this.parentElement.remove()">X</button>
+            </div>
+        </div>
+
+        <button type="button" class="btn-azul" onclick="adicionarIngrediente()">Adicionar Ingrediente</button>
+        <button type="submit" class="btn-criar">Salvar Prato</button>
+    </form>
+
+
+
+    <script>
+        function adicionarIngrediente() {
+            const container = document.getElementById('ingredientes-container');
+            const primeiroItem = container.querySelector('.ingrediente-item');
+            if (!primeiroItem) return;
+
+            // 🔹 Clona o primeiro item já renderizado
+            const novoItem = primeiroItem.cloneNode(true);
+
+            // Limpa o valor do select e do input
+            novoItem.querySelector('select').value = '';
+            novoItem.querySelector('input[name="quantidade"]').value = 1;
+
+            // Reatribui o evento do botão remover
+            novoItem.querySelector('.btn-remover').onclick = function() {
+                removerIngrediente(this);
+            };
+
+            container.appendChild(novoItem);
+        }
+
+        function removerIngrediente(botao) {
+            const container = document.getElementById('ingredientes-container');
+            const itens = container.querySelectorAll('.ingrediente-item');
+
+            // ⚠️ Se só houver 1 ingrediente, não permite remover
+            if (itens.length === 1) {
+                alert("O prato precisa ter pelo menos um ingrediente!");
+                return;
+            }
+
+            // Remove normalmente se houver mais de um
+            botao.parentElement.remove();
+        }
+
+        // Aplica a função segura ao botão inicial também
+        document.addEventListener("DOMContentLoaded", () => {
+            const btnInicial = document.querySelector('.ingrediente-item .btn-remover');
+            if (btnInicial) {
+                btnInicial.onclick = function() {
+                    removerIngrediente(this);
+                };
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

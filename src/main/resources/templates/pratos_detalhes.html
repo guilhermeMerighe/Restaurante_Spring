@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Detalhes do Prato - ' + ${prato.descricao}"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1 th:text="'🍽️ ' + ${prato.descricao}"></h1>
+
+    <div class="detalhes">
+        <p><strong>ID:</strong> <span th:text="${prato.codPrato}"></span></p>
+        <p><strong>Valor Unitário:</strong> R$ <span th:text="${#numbers.formatDecimal(prato.valorUnitario, 1, 2)}"></span></p>
+    </div>
+
+    <h2>🧾 Ingredientes</h2>
+    <div class="tabela">
+        <table>
+            <tr>
+                <th>Ingrediente</th>
+                <th>Quantidade</th>
+                <th>Valor Unitário</th>
+            </tr>
+            <tr th:each="c : ${composicoes}">
+                <td th:text="${c.codIngrediente}"></td>
+                <td th:text="${c.quantidade}"></td>
+                <td th:text="${#numbers.formatDecimal(c.valorUnitario, 1, 2)}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="menu">
+        <button class="btn-voltar" onclick="window.location.href='/pratos'">Voltar</button>
+    </div>
+</body>
+</html>

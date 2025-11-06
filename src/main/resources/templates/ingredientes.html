@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingredientes - SpringFood</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>🥕 Lista de Ingredientes</h1>
+
+    <div class="menu">
+        <button onclick="window.location.href='/'">Voltar</button>
+        <button class="btn-criar" onclick="window.location.href='/ingredientes/criar'">➕ Criar Ingrediente</button>
+    </div>
+
+    <div class="tabela">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Unidade</th>
+                <th>Estoque Atual</th>
+                <th>Adicionar ao Estoque</th>
+            </tr>
+
+            <tr th:each="i : ${ingredientes}">
+                <td th:text="${i.codIngrediente}"></td>
+                <td th:text="${i.descricao}"></td>
+                <td th:text="${i.unidade} ? 'Kg' : 'Unidade'"></td>
+                <td th:text="${i.quantidadeEstoque}"></td>
+                <td>
+                    <form th:action="@{'/ingredientes/' + ${i.codIngrediente} + '/acrescentar'}" method="post">
+                        <input type="number" name="quantidade" min="1" placeholder="Qtd" required style="width:70px;">
+                        <button type="submit" class="btn-azul" style="margin-top:5px;">Acrescentar</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

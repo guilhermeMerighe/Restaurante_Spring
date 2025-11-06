@@ -390,6 +390,17 @@ h1 {
     margin-top: 10px; /* 🔹 pequeno espaço antes do botão */
 }
 
+/* 🔹 Espaçamento entre ingredientes no formulário de criação de prato */
+.ingrediente-item {
+    margin-bottom: 20px; /* espaço entre blocos de ingrediente */
+    position: relative;
+    padding-top: 10px;
+}
+
+.ingrediente-item .btn-remover {
+    margin-bottom: 10px; /* afasta o X do campo abaixo */
+}
+
 /* ===========================================
  🆕 FORMULÁRIO DE CRIAR PEDIDO
 =========================================== */
@@ -454,4 +465,42 @@ footer {
     bottom: 15px;
     font-size: 0.9em;
     color: #ffffffaa;
+}
+
+/* 🔹 Espaço entre tabela e botão voltar */
+.tabela + .menu {
+    margin-top: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===========================================
+ 🎨 Ajustes visuais para pratos_detalhes.html
+=========================================== */
+
+/* 🔹 Menos espaço entre o título e o bloco de detalhes */
+h1 + .detalhes {
+    margin-top: 15px; /* era ~50px, reduzido para deixar mais compacto */
+}
+
+/* 🔹 Mais respiro entre o bloco de detalhes e o título "Ingredientes" */
+.detalhes + h2 {
+    margin-top: 40px; /* antes estava muito colado, agora dá equilíbrio */
+}
+
+/* 🔹 Ingredientes mais próximos da tabela */
+h2 + .tabela {
+    margin-top: 10px; /* reduzido pra unir visualmente o título e a tabela */
 }
